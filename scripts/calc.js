@@ -1,3 +1,8 @@
+// SELECTORS
+
+// display
+const displaySelector = document.querySelector("#display");
+
 // operation functions
 const add = (a, b) => a + b;
 
@@ -7,10 +12,18 @@ const multiply = (a, b) => a * b;
 
 const divide = (a, b) => a / b;
 
+// variables
+let initialNumber;
+let operator;
+let nextNumber;
+
+// display
+let display;
+
 // operator function - takes an operator (+, -, *, /) and two numbers (a and b)
 // a is set to initialNumber var
 // b is set to nextNumber var
-// operator is set to teh operator var
+// operator is set to the operator var
 // an operation function is called depending on the value of the operator var
 const operate = (a, operator, b) => {
     if (operator === "+") {
@@ -34,10 +47,16 @@ const operate = (a, operator, b) => {
     }
 }
 
-// variables
-let initialNumber;
-let operator = "";
-let nextNumber;
+// solution var = stores final result of initialNumber, the operator, and next Number
+// ex. initialNumber = 2
+// operator = "+"
+// nextNumber = "8"
+// solution = 10
+
+let solution = operate(initialNumber, operator, nextNumber);
 
 // click a number and display should be updated to that number, then click an operator and display should be updated to the operator, finally click the last number and the display should update to that number while remembering the previous two operations
 // ex. click "2", display should show "2". "2" then gets stored in the "bank". "+" is then clicked, so "+" should be displayed. "+" is then stored in the "bank" along with "2". lastly, "8" is clicked which should be shown in the display. then when the user clicks "=" it should fire the "add" function
+
+// todo
+// *** when result is returned, initialNumber needs to be set to the new result ***
