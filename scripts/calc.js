@@ -3,6 +3,9 @@
 // display
 const displaySelector = document.querySelector("#display");
 
+// calculator button selectors
+const btnSelector = document.querySelectorAll(".calc-btn")
+
 // operation functions
 const add = (a, b) => a + b;
 
@@ -46,6 +49,14 @@ const operate = (a, operator, b) => {
         return result;
     }
 }
+
+// event listener - listens on each button
+btnSelector.forEach((button) => {
+    console.log(button);
+    button.addEventListener("click", (event) => {
+        console.log(event.target.innerText);
+    });
+});
 
 // solution var = stores final result of initialNumber, the operator, and next Number
 // ex. initialNumber = 2
