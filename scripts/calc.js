@@ -54,8 +54,9 @@ const operate = (a, operator, b) => {
 btnSelector.addEventListener("click", (event) => {
     if (event.target.tagName === "BUTTON") {
         console.log(event.target.innerText);
+        displaySelector.textContent = event.target.innerText;
     }
-})
+});
 
 // solution var = stores final result of initialNumber, the operator, and next Number
 // ex. initialNumber = 2
@@ -69,4 +70,5 @@ let solution = operate(initialNumber, operator, nextNumber);
 // ex. click "2", display should show "2". "2" then gets stored in the "bank". "+" is then clicked, so "+" should be displayed. "+" is then stored in the "bank" along with "2". lastly, "8" is clicked which should be shown in the display. then when the user clicks "=" it should fire the "add" function
 
 // todo
-// *** when result is returned, initialNumber needs to be set to the new result ***
+// 1. *** when result is returned, initialNumber needs to be set to the new result ***
+// 2. clear should remove all the data and set display to blank
