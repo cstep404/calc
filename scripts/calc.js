@@ -3,8 +3,8 @@
 // display
 const displaySelector = document.querySelector("#display");
 
-// calculator button selectors
-const btnSelector = document.querySelectorAll(".calc-btn")
+// use the buttons parent (the calculator div) to select the buttons using event delegation
+const btnSelector = document.querySelector("#calculator")
 
 // operation functions
 const add = (a, b) => a + b;
@@ -51,12 +51,11 @@ const operate = (a, operator, b) => {
 }
 
 // event listener - listens on each button
-btnSelector.forEach((button) => {
-    console.log(button);
-    button.addEventListener("click", (event) => {
+btnSelector.addEventListener("click", (event) => {
+    if (event.target.tagName === "BUTTON") {
         console.log(event.target.innerText);
-    });
-});
+    }
+})
 
 // solution var = stores final result of initialNumber, the operator, and next Number
 // ex. initialNumber = 2
