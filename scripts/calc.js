@@ -119,15 +119,12 @@ btnSelector.addEventListener("click", (event) => {
                 console.log('firing operate function');
                 let answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
                 // 4. set display to answer
-                displaySelector.textContent = answer;
-                initialNumber = answer;
+                displaySelector.textContent = +answer.toFixed(2);
+                initialNumber = +answer.toFixed(2);
                 console.log(`initialNumber: ${initialNumber}`);
                 bank.length = 0;
                 console.log(bank);
             }
         }
     }
-
-    // if last pressed button was equals, only operators can be clicked
-
 });
