@@ -1,2 +1,2 @@
 # calc
-Calculator project for TOP
+Calculator project for TOP.

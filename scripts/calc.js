@@ -18,6 +18,7 @@ let initialNumber = "";
 let operator = "";
 let nextNumber = "";
 let bank = [];
+let lastBtnPressed = ""
 
 // operator function - takes an operator (+, -, *, /) and two numbers (a and b)
 // a is set to initialNumber var
@@ -46,11 +47,27 @@ const operate = (a, operator, b) => {
     }
 }
 
+const clearAll = () => {
+    initialNumber = "";
+    operator = "";
+    nextNumber = "";
+    bank.length === 0;
+}
+
 // event listener - listens on each button
 btnSelector.addEventListener("click", (event) => {
     console.log(event.target);
+    lastBtnPressed = event.target.id;
+    console.log(`lastBtnPressed: ${lastBtnPressed}`);
     if (event.target.tagName === "BUTTON") {
         console.log("bank: ", bank);
+
+        // clear all data in calc
+        if (event.target.id === "clear") {
+            clearAll();
+            displaySelector.textContent = 0;
+        }
+
         if (event.target.classList[1] === "number" && bank.length === 0) {
             // when a number is pressed it should be added to initialNumber and every number press after should also be added to initialNumber
             initialNumber += event.target.textContent;
@@ -73,6 +90,7 @@ btnSelector.addEventListener("click", (event) => {
             // 4. push operator to "bank"
             bank.push(operator);
             console.log(bank);
+            operator = "";
         }
 
         if (event.target.classList[1] === "number" && bank.length > 0) {
@@ -91,15 +109,25 @@ btnSelector.addEventListener("click", (event) => {
             // 2. set nextNumber to an empty string
             nextNumber = "";
             console.log(`nextNumber: ${nextNumber}`);
-            // 3. fire operator function to calculate. convert index 0 and index 2 from strings to numbers
-            console.log('firing operate function');
-            let answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
-            // 4. set display to answer
-            displaySelector.textContent = answer;
+            // if bank[1] === "/" && bank[2] === "0", write an error message
+            if (bank[1] === "/" && bank[2] === "0") {
+                console.log("You shall not divide by zero!");
+                displaySelector.textContent = "You shall not divide by zero!";
+                bank.length = 0;
+            } else {
+                // 3. fire operator function to calculate. convert index 0 and index 2 from strings to numbers
+                console.log('firing operate function');
+                let answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
+                // 4. set display to answer
+                displaySelector.textContent = answer;
+                initialNumber = answer;
+                console.log(`initialNumber: ${initialNumber}`);
+                bank.length = 0;
+                console.log(bank);
+            }
         }
     }
-});
 
-// todo
-// 1. *** when result is returned, initialNumber needs to be set to the new result ***
-// 2. clear should remove all the data and set display to blank
+    // if last pressed button was equals, only operators can be clicked
+
+});
