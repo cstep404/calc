@@ -19,6 +19,7 @@ let operator = "";
 let nextNumber = "";
 let bank = [];
 let lastBtnPressed = ""
+let answer = 0;
 
 // operator function - takes an operator (+, -, *, /) and two numbers (a and b)
 // a is set to initialNumber var
@@ -51,8 +52,11 @@ const clearAll = () => {
     initialNumber = "";
     operator = "";
     nextNumber = "";
-    bank.length === 0;
+    bank.length = 0;
+    answer = 0;
 }
+
+displaySelector.textContent = 0;
 
 // event listener - listens on each button
 btnSelector.addEventListener("click", (event) => {
@@ -61,21 +65,32 @@ btnSelector.addEventListener("click", (event) => {
     console.log(`lastBtnPressed: ${lastBtnPressed}`);
     if (event.target.tagName === "BUTTON") {
         console.log("bank: ", bank);
+        console.log(`bank length: ${bank.length}`);
 
         // clear all data in calc
         if (event.target.id === "clear") {
+            console.log("CLEAR FUNCTION FIRING!");
             clearAll();
             displaySelector.textContent = 0;
         }
 
         if (event.target.classList[1] === "number" && bank.length === 0) {
+            console.log("NUMBER PRESSED AND BANK LENGTH IS 0");
             // when a number is pressed it should be added to initialNumber and every number press after should also be added to initialNumber
-            initialNumber += event.target.textContent;
-            console.log(`initialNumber: ${initialNumber}`);
-            displaySelector.textContent = initialNumber;
+            if (answer > 0) {
+                console.log(`ANSWER IS GREATER THAN ZERO!`);
+                clearAll();
+                initialNumber += event.target.textContent;
+                displaySelector.textContent = initialNumber;
+            } else {
+                initialNumber += event.target.textContent;
+                console.log(`initialNumber: ${initialNumber}`);
+                displaySelector.textContent = initialNumber;
+            } 
         }
 
         if (event.target.classList[1] === "operator") {
+            console.log("OPERATOR PRESSED");
             // 1. push initialNumber string to the "bank"
             bank.push(initialNumber);
             console.log(`initialNumber: ${initialNumber}`);
@@ -94,6 +109,7 @@ btnSelector.addEventListener("click", (event) => {
         }
 
         if (event.target.classList[1] === "number" && bank.length > 0) {
+            console.log("NUMBER PRESSED AND BANK LENGTH > 0");
             nextNumber += event.target.textContent;
             console.log(`nextNumber: ${nextNumber}`);
             displaySelector.textContent = nextNumber;
@@ -102,6 +118,7 @@ btnSelector.addEventListener("click", (event) => {
         // check size of array and if indexes already exist
         // if array is equal to 3, fire operate function
         if (bank.length === 2 && event.target.textContent === "=") {
+            console.log("BANK LENGTH IS 2 AND TARGET BUTTON IS =");
             // 1. push nextNumber string to the "bank"
             bank.push(nextNumber);
             console.log(`nextNumber: ${nextNumber}`);
@@ -117,7 +134,8 @@ btnSelector.addEventListener("click", (event) => {
             } else {
                 // 3. fire operator function to calculate. convert index 0 and index 2 from strings to numbers
                 console.log('firing operate function');
-                let answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
+                answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
+                console.log(`answer is: ${answer}`);
                 // 4. set display to answer
                 displaySelector.textContent = +answer.toFixed(2);
                 initialNumber = +answer.toFixed(2);
