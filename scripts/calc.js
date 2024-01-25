@@ -90,22 +90,29 @@ btnSelector.addEventListener("click", (event) => {
         }
 
         if (event.target.classList[1] === "operator") {
-            console.log("OPERATOR PRESSED");
-            // 1. push initialNumber string to the "bank"
-            bank.push(initialNumber);
-            console.log(`initialNumber: ${initialNumber}`);
-            console.log(bank);
-            // 2. set initialNumber to an empty string
-            initialNumber = "";
-            console.log(`initialNumber: ${initialNumber}`);
-            // 3. set operator to the chosen sign
-            operator += event.target.textContent;
-            console.log(`operator: ${operator}`);
-            displaySelector.textContent = operator;
-            // 4. push operator to "bank"
-            bank.push(operator);
-            console.log(bank);
-            operator = "";
+            if (initialNumber === "") {
+                console.log("Please enter a number first!");
+                displaySelector.textContent = "Please enter a number first!";
+                clearAll();
+            } else {
+                console.log("OPERATOR PRESSED");
+                // 1. push initialNumber string to the "bank"
+                bank.push(initialNumber);
+                console.log(`initialNumber: ${initialNumber}`);
+                console.log(bank);
+                // 2. set initialNumber to an empty string
+                initialNumber = "";
+                console.log(`initialNumber: ${initialNumber}`);
+                // 3. set operator to the chosen sign
+                operator += event.target.textContent;
+                console.log(`operator: ${operator}`);
+                displaySelector.textContent = operator;
+                // 4. push operator to "bank"
+                bank.push(operator);
+                console.log(bank);
+                operator = "";
+            }
+            
         }
 
         if (event.target.classList[1] === "number" && bank.length > 0) {
