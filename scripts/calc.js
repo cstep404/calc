@@ -91,8 +91,8 @@ btnSelector.addEventListener("click", (event) => {
 
         if (event.target.classList[1] === "operator") {
             if (initialNumber === "") {
-                console.log("Please enter a number first!");
-                displaySelector.textContent = "Please enter a number first!";
+                console.log("Cannot enter an operator first or double operators!");
+                displaySelector.textContent = "Cannot enter an operator first or double operators!";
                 clearAll();
             } else {
                 console.log("OPERATOR PRESSED");
