@@ -12,11 +12,12 @@ body {
     min-width: 250px;
     max-width: 250px;
     background-color: #353535;
+    border-top: 2px solid #353535;
 }
 
 #display {
-    background-color: #cccccc;
-    padding: 0.75em;
+    background-color: white;
+    padding: 1.00em;
     margin: 0.75em;
 }
 
@@ -32,8 +33,4 @@ body {
     border-radius: 15%;
     border: 1px solid black;
     box-shadow: 2px 2px 1px black;
-}
-
-.operator, .equals, .clear {
-    background-color: #cccccc;
 }
