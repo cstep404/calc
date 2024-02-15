@@ -37,6 +37,11 @@ body {
     box-shadow: 2px 2px 1px black;
 }
 
+.operator, .equals {
+    background-color: #a5a5a5;
+    color:
+}
+
 .clear {
     background-color: #5eca41;
 }
