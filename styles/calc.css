@@ -5,6 +5,8 @@
 
 body {
     background-color: #191919;
+    display: flex;
+    justify-content: center;
 }
 
 #calculator {
@@ -33,4 +35,8 @@ body {
     border-radius: 15%;
     border: 1px solid black;
     box-shadow: 2px 2px 1px black;
+}
+
+.clear {
+    background-color: #5eca41;
 }

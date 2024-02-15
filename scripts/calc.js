@@ -60,95 +60,68 @@ displaySelector.textContent = 0;
 
 // event listener - listens on each button
 btnSelector.addEventListener("click", (event) => {
-    console.log(event.target);
     lastBtnPressed = event.target.id;
-    console.log(`lastBtnPressed: ${lastBtnPressed}`);
     if (event.target.tagName === "BUTTON") {
-        console.log("bank: ", bank);
-        console.log(`bank length: ${bank.length}`);
-
         // clear all data in calc
         if (event.target.id === "clear") {
-            console.log("CLEAR FUNCTION FIRING!");
             clearAll();
             displaySelector.textContent = 0;
         }
 
         if (event.target.classList[1] === "number" && bank.length === 0) {
-            console.log("NUMBER PRESSED AND BANK LENGTH IS 0");
             // when a number is pressed it should be added to initialNumber and every number press after should also be added to initialNumber
             if (answer > 0) {
-                console.log(`ANSWER IS GREATER THAN ZERO!`);
                 clearAll();
                 initialNumber += event.target.textContent;
                 displaySelector.textContent = initialNumber;
             } else {
                 initialNumber += event.target.textContent;
-                console.log(`initialNumber: ${initialNumber}`);
                 displaySelector.textContent = initialNumber;
             } 
         }
 
         if (event.target.classList[1] === "operator") {
             if (initialNumber === "") {
-                console.log("Cannot enter an operator first or double operators!");
-                displaySelector.textContent = "Cannot enter an operator first or double operators!";
+                displaySelector.textContent = "Invalid option!";
                 clearAll();
             } else {
-                console.log("OPERATOR PRESSED");
                 // 1. push initialNumber string to the "bank"
                 bank.push(initialNumber);
-                console.log(`initialNumber: ${initialNumber}`);
-                console.log(bank);
                 // 2. set initialNumber to an empty string
                 initialNumber = "";
-                console.log(`initialNumber: ${initialNumber}`);
                 // 3. set operator to the chosen sign
                 operator += event.target.textContent;
-                console.log(`operator: ${operator}`);
                 displaySelector.textContent = operator;
                 // 4. push operator to "bank"
                 bank.push(operator);
-                console.log(bank);
                 operator = "";
             }
             
         }
 
         if (event.target.classList[1] === "number" && bank.length > 0) {
-            console.log("NUMBER PRESSED AND BANK LENGTH > 0");
             nextNumber += event.target.textContent;
-            console.log(`nextNumber: ${nextNumber}`);
             displaySelector.textContent = nextNumber;
         }
 
         // check size of array and if indexes already exist
         // if array is equal to 3, fire operate function
         if (bank.length === 2 && event.target.textContent === "=") {
-            console.log("BANK LENGTH IS 2 AND TARGET BUTTON IS =");
             // 1. push nextNumber string to the "bank"
             bank.push(nextNumber);
-            console.log(`nextNumber: ${nextNumber}`);
-            console.log(bank);
             // 2. set nextNumber to an empty string
             nextNumber = "";
-            console.log(`nextNumber: ${nextNumber}`);
             // if bank[1] === "/" && bank[2] === "0", write an error message
             if (bank[1] === "/" && bank[2] === "0") {
-                console.log("You shall not divide by zero!");
                 displaySelector.textContent = "You shall not divide by zero!";
                 bank.length = 0;
             } else {
                 // 3. fire operator function to calculate. convert index 0 and index 2 from strings to numbers
-                console.log('firing operate function');
                 answer = operate(Number(bank[0]), bank[1], Number(bank[2]));
-                console.log(`answer is: ${answer}`);
                 // 4. set display to answer
                 displaySelector.textContent = +answer.toFixed(2);
                 initialNumber = +answer.toFixed(2);
-                console.log(`initialNumber: ${initialNumber}`);
                 bank.length = 0;
-                console.log(bank);
             }
         }
     }
