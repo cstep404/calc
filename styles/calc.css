@@ -21,6 +21,7 @@ body {
     background-color: white;
     padding: 1.00em;
     margin: 0.75em;
+    font-size: 18px;
 }
 
 #button-container {
@@ -39,9 +40,16 @@ body {
 
 .operator, .equals {
     background-color: #a5a5a5;
-    color:
+}
+
+.operator:hover, .equals:hover {
+    background-color: rgb(205, 205, 205);
 }
 
 .clear {
     background-color: #5eca41;
+}
+
+.clear:hover {
+    background-color: #6ce44b;
 }
